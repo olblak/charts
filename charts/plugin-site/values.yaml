@@ -2,12 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-
 backend:
   replicaCount: 1
   image:
     repository: jenkinsciinfra/plugin-site-api
-    tag: 153-290e61
+    tag: v1.10.0
     pullPolicy: IfNotPresent
   port: 8080
   resources:
@@ -17,7 +16,6 @@ backend:
     requests:
       cpu: 500m
       memory: 1024Mi
-
 frontend:
   replicaCount: 1
   image:
@@ -32,23 +30,19 @@ frontend:
     requests:
       cpu: 100m
       memory: 32Mi
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
 service:
   type: ClusterIP
-
 # Please define ingress settings into environment variable
 ingress:
   enabled: false
   paths:
-    - path: /api/(.*)
-      port: backend
-    - path: /(.*)
-      port: frontend
-
+  - path: /api/(.*)
+    port: backend
+  - path: /(.*)
+    port: frontend
 #  annotations:
 #    "cert-manager.io/cluster-issuer": "letsencrypt-prod"
 #    "kubernetes.io/ingress.class": "public-ingress"
@@ -61,32 +55,23 @@ ingress:
 #    - secretName: plugins-tls
 #      hosts:
 #        - plugins.jenkins.io
-
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 dataFileUrl: https://ci.jenkins.io/job/Infra/job/plugin-site-api/job/generate-data/lastSuccessfulBuild/artifact/plugins.json.gzip
 restApiUrl: https://plugins.jenkins.io/api
-
 github:
   clientId: ""
   clientSecret: ""
-
 jira:
   username: ""
   password: ""
-
 # the volume to mount
 # e.g.
 # htmlVolume:
 #   hostPath:
 #     path: /host
 htmlVolume:
-
 # name of the azure storage account to be used
 azureStorageAccountName:
 # key for accessing the azure storage account
